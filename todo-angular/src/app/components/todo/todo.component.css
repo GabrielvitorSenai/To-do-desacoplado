@@ -1,0 +1,348 @@
+/* Sem variáveis aqui — todas vêm do styles.css global via :root e body.dark */
+
+/* ── App ── */
+.app {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--texto);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px 60px;
+  gap: 32px;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── Cabeçalho ── */
+.cabecalho {
+  text-align: center;
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cabecalho-texto h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+}
+
+.cabecalho-texto p {
+  color: var(--texto-sub);
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.btn-tema {
+  position: absolute;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 50px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--texto-sub);
+  font-weight: 600;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px var(--sombra);
+}
+
+.btn-tema:hover {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── Criar Tarefa ── */
+.criar-tarefa {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 520px;
+  background: var(--bg-card);
+  padding: 8px;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px var(--sombra);
+  border: 1px solid var(--borda);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.input-nova {
+  flex: 1;
+  padding: 11px 16px;
+  background: transparent;
+  border: none;
+  color: var(--texto);
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.input-nova::placeholder { color: var(--texto-sub); opacity: 0.7; }
+
+.btn-criar {
+  padding: 11px 26px;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.btn-criar:hover  { background: var(--accent-dark); transform: translateY(-1px); }
+.btn-criar:active { transform: translateY(1px); }
+
+/* ── Kanban ── */
+.kanban {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 1100px;
+}
+
+/* ── Coluna ── */
+.coluna {
+  background: var(--bg-coluna);
+  border-radius: 16px;
+  border: 1px solid var(--borda);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 340px;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.coluna-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  border-bottom: 1px solid var(--borda);
+  background: rgba(255, 255, 255, 0.25);
+  transition: background 0.3s;
+}
+
+body.dark .coluna-header { background: rgba(0, 0, 0, 0.2); }
+
+.pendente-header  { color: var(--amarelo); }
+.execucao-header  { color: var(--accent); }
+.concluida-header { color: var(--verde); }
+
+.badge {
+  background: var(--bg-card);
+  color: var(--texto-sub);
+  border-radius: 12px;
+  padding: 3px 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: 1px solid var(--borda);
+}
+
+.coluna-corpo {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.coluna-vazia {
+  color: var(--texto-sub);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 30px 0;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 6px var(--sombra);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px var(--sombra);
+  border-color: var(--accent);
+}
+
+.card.concluida .card-titulo {
+  text-decoration: line-through;
+  color: var(--texto-sub);
+  opacity: 0.8;
+}
+
+.card-titulo {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+.card-acoes {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-excluir {
+  background: transparent;
+  border: none;
+  color: var(--texto-sub);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 5px 8px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.btn-excluir:hover {
+  color: var(--vermelho);
+  background: rgba(184, 92, 92, 0.08);
+}
+
+.btn-avancar {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-avancar:hover  { background: var(--accent-dark); }
+.btn-avancar:active { transform: scale(0.96); }
+
+.btn-reabrir {
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid var(--borda);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-reabrir:hover {
+  background: var(--borda);
+  color: var(--texto);
+}
+
+/* ── Rodapé ── */
+.rodape {
+  color: var(--texto-sub);
+  font-size: 0.8rem;
+}
+
+/* ── Responsividade ── */
+@media (max-width: 768px) {
+  .kanban { grid-template-columns: 1fr; }
+  .btn-tema { position: static; }
+  .cabecalho { flex-direction: column; gap: 12px; }
+  .criar-tarefa { flex-direction: column; }
+  .btn-criar { border-radius: 10px; }
+}
+
+/* ── Drag & Drop ── */
+.drag-handle {
+  color: var(--borda);
+  font-size: 1.1rem;
+  cursor: grab;
+  text-align: right;
+  margin-bottom: -6px;
+  transition: color 0.2s;
+}
+
+.card:hover .drag-handle { color: var(--texto-sub); }
+.drag-handle:active { cursor: grabbing; }
+
+.cdk-drag-animating { transition: transform 250ms cubic-bezier(0, 0, 0.2, 1); }
+
+.cdk-drag-preview {
+  background: var(--bg-card);
+  border: 2px solid var(--accent);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+  opacity: 0.96;
+  color: var(--texto);
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+
+.drag-placeholder {
+  background: var(--drag-bg);
+  border: 2px dashed var(--accent);
+  border-radius: 12px;
+  min-height: 72px;
+  transition: all 150ms;
+}
+
+.cdk-drop-list-dragging .card:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.coluna-corpo.cdk-drop-list-receiving {
+  background: var(--drag-bg);
+  border-radius: 0 0 16px 16px;
+}
+
+/* ── Alerta de erro ── */
+.alerta-erro {
+  width: 100%;
+  max-width: 1100px;
+  background: rgba(184, 92, 92, 0.1);
+  border: 1px solid var(--vermelho);
+  color: var(--vermelho);
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 0.88rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alerta-erro button {
+  background: transparent;
+  border: none;
+  color: var(--vermelho);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 4px;
+}
+
+/* ── Loading ── */
+.carregando {
+  color: var(--texto-sub);
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 40px 0;
+}
