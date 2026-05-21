@@ -31,7 +31,7 @@ import jakarta.validation.Valid;
  */
 @RestController
 @RequestMapping("/api/tarefas")
-@CrossOrigin(origins = "http://localhost:4200\", \"http://10.74.241.195:4200")
+@CrossOrigin(origins = "http://localhost:4200\", \"http://10.74.241.111:4200")
 public class TarefaController {
 
     private final TarefaService service;
