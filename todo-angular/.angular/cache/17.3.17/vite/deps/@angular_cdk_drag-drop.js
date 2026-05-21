@@ -1,7 +1,7 @@
 import {
   DOCUMENT,
   isPlatformBrowser
-} from "./chunk-XPURKRUP.js";
+} from "./chunk-3BIQIJGS.js";
 import {
   APP_ID,
   ApplicationRef,
@@ -87,7 +87,7 @@ import {
   ɵɵqueryRefresh,
   ɵɵstyleProp,
   ɵɵviewQuery
-} from "./chunk-VZYJXUXB.js";
+} from "./chunk-QSWSW622.js";
 
 // node_modules/@angular/cdk/fesm2022/coercion.mjs
 function coerceNumberProperty(value, fallbackValue = 0) {
