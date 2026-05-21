@@ -1,0 +1,123 @@
+<div class="app">
+
+  <header class="cabecalho">
+    <div class="cabecalho-texto">
+      <h1>🌿 Meu Quadro Kanban</h1>
+      <p>Gerencie suas tarefas com calma</p>
+    </div>
+    <button class="btn-tema" (click)="alternarTema()">
+      <span>{{ modoEscuro ? '☀️' : '🌙' }}</span>
+      <span>{{ modoEscuro ? 'Modo Claro' : 'Modo Escuro' }}</span>
+    </button>
+  </header>
+
+  <!-- Alerta de erro -->
+  <div class="alerta-erro" *ngIf="erro">
+    ⚠️ {{ erro }}
+    <button (click)="fecharErro()">✕</button>
+  </div>
+
+  <!-- Criar Tarefa -->
+  <div class="criar-tarefa">
+    <input
+      type="text"
+      [(ngModel)]="novoTitulo"
+      (keydown)="onKeydown($event)"
+      placeholder="Nova tarefa..."
+      class="input-nova"
+      [disabled]="carregando"
+    />
+    <button class="btn-criar" (click)="criar()" [disabled]="carregando">
+      {{ carregando ? '...' : '+ Criar' }}
+    </button>
+  </div>
+
+  <!-- Loading -->
+  <div class="carregando" *ngIf="carregando">
+    <span>Carregando tarefas...</span>
+  </div>
+
+  <!-- KANBAN -->
+  <div class="kanban" cdkDropListGroup *ngIf="!carregando">
+
+    <!-- PENDENTES -->
+    <div class="coluna">
+      <div class="coluna-header pendente-header">
+        <span>⏳ Pendentes</span>
+        <span class="badge">{{ pendentes.length }}</span>
+      </div>
+      <div class="coluna-corpo"
+           id="lista-pendentes"
+           cdkDropList
+           [cdkDropListData]="pendentes"
+           [cdkDropListConnectedTo]="['lista-em-execucao','lista-concluidas']"
+           (cdkDropListDropped)="drop($event)">
+        <div class="card" *ngFor="let t of pendentes" cdkDrag [cdkDragData]="t">
+          <div class="drag-handle" cdkDragHandle>⠿</div>
+          <p class="card-titulo">{{ t.titulo }}</p>
+          <div class="card-acoes">
+            <button class="btn-excluir" (click)="excluir(t.id)">🗑 Excluir</button>
+            <button class="btn-avancar" (click)="iniciar(t)">Iniciar →</button>
+          </div>
+          <div *cdkDragPlaceholder class="drag-placeholder"></div>
+        </div>
+        <p class="coluna-vazia" *ngIf="pendentes.length === 0">Nenhuma tarefa pendente.</p>
+      </div>
+    </div>
+
+    <!-- EM EXECUÇÃO -->
+    <div class="coluna">
+      <div class="coluna-header execucao-header">
+        <span>⚙️ Em Execução</span>
+        <span class="badge">{{ emExecucao.length }}</span>
+      </div>
+      <div class="coluna-corpo"
+           id="lista-em-execucao"
+           cdkDropList
+           [cdkDropListData]="emExecucao"
+           [cdkDropListConnectedTo]="['lista-pendentes','lista-concluidas']"
+           (cdkDropListDropped)="drop($event)">
+        <div class="card" *ngFor="let t of emExecucao" cdkDrag [cdkDragData]="t">
+          <div class="drag-handle" cdkDragHandle>⠿</div>
+          <p class="card-titulo">{{ t.titulo }}</p>
+          <div class="card-acoes">
+            <button class="btn-excluir" (click)="excluir(t.id)">🗑 Excluir</button>
+            <button class="btn-avancar" (click)="concluir(t)">Concluir →</button>
+          </div>
+          <div *cdkDragPlaceholder class="drag-placeholder"></div>
+        </div>
+        <p class="coluna-vazia" *ngIf="emExecucao.length === 0">Nenhuma em andamento.</p>
+      </div>
+    </div>
+
+    <!-- CONCLUÍDAS -->
+    <div class="coluna">
+      <div class="coluna-header concluida-header">
+        <span>✅ Concluídas</span>
+        <span class="badge">{{ concluidas.length }}</span>
+      </div>
+      <div class="coluna-corpo"
+           id="lista-concluidas"
+           cdkDropList
+           [cdkDropListData]="concluidas"
+           [cdkDropListConnectedTo]="['lista-pendentes','lista-em-execucao']"
+           (cdkDropListDropped)="drop($event)">
+        <div class="card concluida" *ngFor="let t of concluidas" cdkDrag [cdkDragData]="t">
+          <div class="drag-handle" cdkDragHandle>⠿</div>
+          <p class="card-titulo">{{ t.titulo }}</p>
+          <div class="card-acoes">
+            <button class="btn-excluir" (click)="excluir(t.id)">🗑 Excluir</button>
+            <button class="btn-reabrir" (click)="reabrir(t)">Reabrir 🔁</button>
+          </div>
+          <div *cdkDragPlaceholder class="drag-placeholder"></div>
+        </div>
+        <p class="coluna-vazia" *ngIf="concluidas.length === 0">Nenhuma concluída ainda.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="rodape">
+    🔗 Conectado ao backend <strong>Spring Boot</strong> — dados salvos no <strong>MySQL</strong>
+  </footer>
+</div>
