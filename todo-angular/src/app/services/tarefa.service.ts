@@ -13,7 +13,7 @@ import { Tarefa, StatusTarefa } from '../models/tarefa.model';
 export class TarefaService {
 
   // URL base da API — deve bater com o backend Spring Boot
-  private readonly API = 'https://skjzf261-8088.brs.devtunnels.ms/';
+  private readonly API = 'http://10.74.241.105:8088/api/tarefas';
 
   constructor(private http: HttpClient) {}
 

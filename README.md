@@ -91,7 +91,7 @@ A API ficará disponível em: `http://localhost:8088`
 **Configure a URL da API** em `todo-angular/src/app/services/tarefa.service.ts`:
 
 ```typescript
-private readonly API = 'http://localhost:8088/api/tarefas';
+private readonly API = 'http://10.74.241.105:8088/api/tarefas';
 ```
 
 **Instale as dependências e execute:**
